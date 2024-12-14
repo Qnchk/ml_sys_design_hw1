@@ -1,0 +1,69 @@
+[2024-12-14T11:28:13.453+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-12-14T11:28:13.460+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: movielens_pipeline.train_and_predict manual__2024-12-14T11:27:59.002152+00:00 [queued]>
+[2024-12-14T11:28:13.464+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: movielens_pipeline.train_and_predict manual__2024-12-14T11:27:59.002152+00:00 [queued]>
+[2024-12-14T11:28:13.465+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2024-12-14T11:28:13.471+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): train_and_predict> on 2024-12-14 11:27:59.002152+00:00
+[2024-12-14T11:28:13.474+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=85) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-12-14T11:28:13.475+0000] {standard_task_runner.py:72} INFO - Started process 86 to run task
+[2024-12-14T11:28:13.476+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'movielens_pipeline', 'train_and_predict', 'manual__2024-12-14T11:27:59.002152+00:00', '--job-id', '12', '--raw', '--subdir', 'DAGS_FOLDER/movielens_pipeline.py', '--cfg-path', '/tmp/tmpdmlq2x0s']
+[2024-12-14T11:28:13.477+0000] {standard_task_runner.py:105} INFO - Job 12: Subtask train_and_predict
+[2024-12-14T11:28:13.503+0000] {task_command.py:467} INFO - Running <TaskInstance: movielens_pipeline.train_and_predict manual__2024-12-14T11:27:59.002152+00:00 [running]> on host 3470b59dfe19
+[2024-12-14T11:28:13.538+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='movielens_pipeline' AIRFLOW_CTX_TASK_ID='train_and_predict' AIRFLOW_CTX_EXECUTION_DATE='2024-12-14T11:27:59.002152+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-14T11:27:59.002152+00:00'
+[2024-12-14T11:28:13.538+0000] {logging_mixin.py:190} INFO - Task instance is in running state
+[2024-12-14T11:28:13.539+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: queued
+[2024-12-14T11:28:13.539+0000] {logging_mixin.py:190} INFO - Current task name:train_and_predict state:running start_date:2024-12-14 11:28:13.461023+00:00
+[2024-12-14T11:28:13.539+0000] {logging_mixin.py:190} INFO - Dag name:movielens_pipeline and current dag run status:running
+[2024-12-14T11:28:13.539+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-12-14T11:28:13.539+0000] {train_and_predict.py:20} INFO - Initializing Spark session.
+[2024-12-14T11:28:16.304+0000] {train_and_predict.py:27} INFO - Configuring Spark S3 settings.
+[2024-12-14T11:28:16.312+0000] {train_and_predict.py:37} INFO - Spark session created successfully.
+[2024-12-14T11:28:16.313+0000] {train_and_predict.py:48} INFO - Loading train and test datasets from MinIO.
+[2024-12-14T11:28:17.730+0000] {train_and_predict.py:53} ERROR - Failed to read datasets: An error occurred while calling o41.csv.
+: java.lang.RuntimeException: java.lang.ClassNotFoundException: Class org.apache.hadoop.fs.s3a.S3AFileSystem not found
+	at org.apache.hadoop.conf.Configuration.getClass(Configuration.java:2688)
+	at org.apache.hadoop.fs.FileSystem.getFileSystemClass(FileSystem.java:3431)
+	at org.apache.hadoop.fs.FileSystem.createFileSystem(FileSystem.java:3466)
+	at org.apache.hadoop.fs.FileSystem.access$300(FileSystem.java:174)
+	at org.apache.hadoop.fs.FileSystem$Cache.getInternal(FileSystem.java:3574)
+	at org.apache.hadoop.fs.FileSystem$Cache.get(FileSystem.java:3521)
+	at org.apache.hadoop.fs.FileSystem.get(FileSystem.java:540)
+	at org.apache.hadoop.fs.Path.getFileSystem(Path.java:365)
+	at org.apache.spark.sql.execution.datasources.DataSource$.$anonfun$checkAndGlobPathIfNecessary$1(DataSource.scala:724)
+	at scala.collection.immutable.List.map(List.scala:293)
+	at org.apache.spark.sql.execution.datasources.DataSource$.checkAndGlobPathIfNecessary(DataSource.scala:722)
+	at org.apache.spark.sql.execution.datasources.DataSource.checkAndGlobPathIfNecessary(DataSource.scala:551)
+	at org.apache.spark.sql.execution.datasources.DataSource.resolveRelation(DataSource.scala:404)
+	at org.apache.spark.sql.DataFrameReader.loadV1Source(DataFrameReader.scala:229)
+	at org.apache.spark.sql.DataFrameReader.$anonfun$load$2(DataFrameReader.scala:211)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.sql.DataFrameReader.load(DataFrameReader.scala:211)
+	at org.apache.spark.sql.DataFrameReader.csv(DataFrameReader.scala:538)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:282)
+	at py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)
+	at py4j.commands.CallCommand.execute(CallCommand.java:79)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:182)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:106)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.lang.ClassNotFoundException: Class org.apache.hadoop.fs.s3a.S3AFileSystem not found
+	at org.apache.hadoop.conf.Configuration.getClassByName(Configuration.java:2592)
+	at org.apache.hadoop.conf.Configuration.getClass(Configuration.java:2686)
+	... 29 more
+
+[2024-12-14T11:28:18.090+0000] {python.py:240} INFO - Done. Returned value was: None
+[2024-12-14T11:28:18.107+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-12-14T11:28:18.110+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=movielens_pipeline, task_id=train_and_predict, run_id=manual__2024-12-14T11:27:59.002152+00:00, execution_date=20241214T112759, start_date=20241214T112813, end_date=20241214T112818
+[2024-12-14T11:28:18.131+0000] {logging_mixin.py:190} INFO - Task instance in success state
+[2024-12-14T11:28:18.132+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: running
+[2024-12-14T11:28:18.132+0000] {logging_mixin.py:190} INFO - Dag name:movielens_pipeline queued_at:2024-12-14 11:27:59.014523+00:00
+[2024-12-14T11:28:18.132+0000] {logging_mixin.py:190} INFO - Task hostname:3470b59dfe19 operator:PythonOperator
+[2024-12-14T11:28:18.179+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2024-12-14T11:28:18.200+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-14T11:28:18.201+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

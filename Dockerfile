@@ -8,7 +8,9 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 USER airflow
-ENV JAVA_HOME=/opt/homebrew/opt/openjdk@11
+# Adding JDK - Required for PySpark
+COPY --from=openjdk:8-jre-slim /usr/local/openjdk-8 /usr/local/openjdk-8
+ENV JAVA_HOME /usr/local/openjdk-8
 # Install Python dependencies
 COPY requirements.txt /requirements.txt
 RUN pip install --no-cache-dir -r /requirements.txt
