@@ -1,1 +1,1 @@
-![MinIO Object Storage](./minio.PNG)
+![MinIO Object Storage](./moveilense.png)
